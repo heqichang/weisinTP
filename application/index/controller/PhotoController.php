@@ -49,7 +49,8 @@ class PhotoController extends BaseController
      */
     public function delete() {
         $post = $this->request->post();
-        $service = new AlbumService();
+
+        $service = new PhotoService();
         $service->delete($post);
 
         return $this->response_ok();
@@ -60,8 +61,10 @@ class PhotoController extends BaseController
      * @return \think\response\Json
      */
     public function getList() {
-        $service = new AlbumService();
-        $result = $service->getList();
+        $get = $this->request->get();
+
+        $service = new PhotoService();
+        $result = $service->getList($get);
 
         return $this->response_ok($result);
     }

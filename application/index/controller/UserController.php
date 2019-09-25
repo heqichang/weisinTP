@@ -18,6 +18,11 @@ use app\http\exception\MyException;
  */
 class UserController extends BaseController {
 
+    /**
+     * 注册
+     * @return \think\response\Json
+     * @throws MyException
+     */
     public function register() {
 
         $post = $this->request->post();
@@ -32,6 +37,11 @@ class UserController extends BaseController {
         }
     }
 
+    /**
+     * 登录
+     * @return \think\response\Json
+     * @throws MyException
+     */
     public function login() {
 
         $post = $this->request->post();
@@ -42,6 +52,11 @@ class UserController extends BaseController {
         return $this->response_ok($result);
     }
 
+    /**
+     * 编辑
+     * @return \think\response\Json
+     * @throws MyException
+     */
     public function edit() {
 
         $post = $this->request->post();
@@ -53,6 +68,23 @@ class UserController extends BaseController {
         return $this->response_ok();
     }
 
+    /**
+     * 详情
+     * @return \think\response\Json
+     * @throws MyException
+     */
+    public function detail() {
+
+        $get = $this->request->get();
+
+        $service = new UserService();
+
+        $result = $service->detail($get);
+
+        return $this->response_ok($result);
+    }
+
+    // TODO: 待开发
     public function delete() {
 
     }

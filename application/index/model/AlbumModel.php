@@ -19,18 +19,18 @@ class AlbumModel extends BaseModel
         return $this->hasMany('PhotoModel', 'album_id', 'id');
     }
 
-    public static function getList($param) {
+    public static function getList($get) {
 
         $db = self::field('id, name');
 
         $page = 1;
 
-        if (isset($param['page'])) {
-            $page = $param['page'];
+        if (isset($get['page'])) {
+            $page = $get['page'];
         }
 
-        if (isset($param['userId'])) {
-            $db = $db->where('user_id', $param['userId']);
+        if (isset($get['userId'])) {
+            $db = $db->where('user_id', $get['userId']);
         }
 
         return $db->paginate(10, false, ['page' => $page]);

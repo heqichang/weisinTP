@@ -101,7 +101,7 @@ class ArticleService
         $validate = new ArticleValidate();
         $validate->run($post, '', 'delete');
 
-        $article = ArticleModel::get($post['id']);
+        $article = ArticleModel::get($post['id'], 'comments');
 
         if (null === $article) {
             throw new MyException('不存在该文章', 100011);
@@ -109,12 +109,11 @@ class ArticleService
 
         // 非作者或管理员不可用此操作
         $apiUserId = app('api_user')->getUser('id');
-        $isAdmin = app('api_user')->getUser('is_admin');
-        if ($apiUserId != $article['user_id'] && !$isAdmin) {
+        if ($apiUserId != $article['user_id']) {
             throw new MyException('没有权限执行此操作', 10011);
         }
 
-        $article->delete();
+        $article->together('comments')->delete();
     }
 
 
@@ -131,6 +130,27 @@ class ArticleService
         $result = ArticleModel::getList($get);
 
         return $result;
+    }
+
+
+    /**
+     * 文章详情
+     * @param $id
+     * @return null|static
+     * @throws MyException
+     */
+    public function getDetail($get) {
+
+        $validate = new ArticleValidate();
+        $validate->run($get, '', 'detail');
+
+        $model = ArticleModel::getDetail($get['id']);
+
+        if (null === $model) {
+            throw new MyException('没有找到该文章', 10011);
+        }
+
+        return $model;
     }
 
 

@@ -78,47 +78,38 @@ class PhotoService
      */
     public function delete($post) {
 
-        $validate = new AlbumValidate();
+        $validate = new PhotoValidate();
         $validate->run($post, '', 'delete');
 
-        $album = AlbumModel::get($post['id'], 'photos');
-
-        if (null === $album) {
-            throw new MyException('不存在该文章', 100011);
-        }
+        $photo = PhotoModel::get($post['id']);
 
         // 非作者或管理员不可用此操作
         $apiUserId = app('api_user')->getUser('id');
-        $isAdmin = app('api_user')->getUser('is_admin');
-        if ($apiUserId != $album['user_id'] && !$isAdmin) {
+        if ($apiUserId != $photo['user_id']) {
             throw new MyException('没有权限执行此操作', 10011);
         }
 
-        $album->together('photos')->delete();
+        $photo->delete();
     }
 
 
     /**
-     * 相册列表
-     * @param $param
+     * 图片列表
+     * @param $get
      * @return \think\Paginator
+     * @throws \app\http\exception\FromValidException
      */
-    public function getList($param) {
+    public function getList($get) {
 
-        $db = AlbumModel::field('id, name');
+        $validate = new PhotoValidate();
+        $validate->run($get, '', 'list');
 
         $page = 1;
-
-        if (isset($param['page'])) {
-            $page = $param['page'];
+        if (isset($get['page'])) {
+            $page = $get['page'];
         }
 
-        if (isset($param['userId'])) {
-            $db = $db->where('user_id', $param['userId']);
-        }
-
-        $result = $db->paginate(10, false, ['page' => $page]);
-        return $result;
+        return PhotoModel::getList($get['album_id'], $page);
     }
 
 

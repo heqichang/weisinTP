@@ -17,6 +17,7 @@ class UserValidate extends BaseValidate {
         'register' => ['username', 'secret'],
         'login'  =>  ['username','secret'],
         'edit' => ['username'],
+        'detail' => ['id'],
     ];
 
     /**

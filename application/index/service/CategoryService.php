@@ -9,6 +9,7 @@
 namespace app\index\service;
 
 
+use app\http\exception\MyException;
 use app\index\model\CategoryModel;
 use app\index\validate\CategoryValidate;
 

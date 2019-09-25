@@ -59,7 +59,10 @@ class UserService extends MyService
         $validate = new UserValidate();
         $validate->run($post, '', 'login');
 
-        $user = UserModel::getByUsername($post['username'], ['id', 'secret']);
+        $user = UserModel::getByUsername(
+            $post['username'],
+            ['id', 'secret']
+        );
 
         if ($user->isEmpty()) {
             throw new MyException('用户不存在', 10013);
@@ -76,6 +79,7 @@ class UserService extends MyService
         ]);
 
         return [
+            'id' => $user['id'],
             'token' => $token,
         ];
     }
@@ -114,6 +118,27 @@ class UserService extends MyService
     }
 
 
+    /**
+     * 用户详情
+     * @param $get
+     * @return array|\PDOStatement|string|\think\Model
+     * @throws MyException
+     */
+    public function detail($get) {
+
+        $validate = new UserValidate();
+        $validate->run($get, '', 'detail');
+
+        $model = UserModel::getByID($get['id'], ['id', 'username', 'avatar', 'status', 'is_admin']);
+
+        if ($model->isEmpty()) {
+            throw new MyException('不存在该用户', 100011);
+        }
+
+        return $model;
+    }
+
+    //TODO: 待开发
     public function delete($post) {
 
 

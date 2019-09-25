@@ -2,43 +2,26 @@
 /**
  * Created by PhpStorm.
  * User: heqichang
- * Date: 9/24/19
- * Time: 4:08 PM
+ * Date: 9/25/19
+ * Time: 9:20 AM
  */
 
 namespace app\index\controller;
 
 
-use app\index\service\AlbumService;
+use app\index\service\CommentService;
 
-/**
- * 相册控制器
- * Class AlbumController
- * @package app\index\controller
- */
-class AlbumController extends BaseController
+class CommentController extends BaseController
 {
     /**
-     * 添加
+     * 发布
      * @return \think\response\Json
      */
     public function add() {
+
         $post = $this->request->post();
-        $service = new AlbumService();
+        $service = new CommentService();
         $service->add($post);
-
-        return $this->response_ok();
-    }
-
-    /**
-     * 编辑
-     * @return \think\response\Json
-     * @throws \app\http\exception\MyException
-     */
-    public function edit() {
-        $post = $this->request->post();
-        $service = new AlbumService();
-        $service->edit($post);
 
         return $this->response_ok();
     }
@@ -49,27 +32,28 @@ class AlbumController extends BaseController
      * @throws \app\http\exception\MyException
      */
     public function delete() {
+
         $post = $this->request->post();
-        $service = new AlbumService();
+        $service = new CommentService();
         $service->delete($post);
 
         return $this->response_ok();
     }
 
     /**
-     * 相册列表
+     * 文章列表
      * @return \think\response\Json
      */
     public function getList() {
 
         $get = $this->request->get();
 
-        $service = new AlbumService();
+        $service = new CommentService();
+
         $result = $service->getList($get);
 
         return $this->response_ok($result);
     }
-
 
 
 }

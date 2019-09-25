@@ -18,6 +18,8 @@ Route::group('user', function () {
     Route::post('edit', 'index/UserController/edit')->middleware('auth');
     Route::post('delete', 'index/UserController/delete')->middleware(['auth', 'admin']);
 
+    Route::get('detail', 'index/UserController/detail');
+
 })->allowCrossDomain();
 
 // 文章模块
@@ -28,6 +30,7 @@ Route::group('article', function () {
     Route::post('delete', 'index/ArticleController/delete')->middleware('auth');
 
     Route::get('list', 'index/ArticleController/getList');
+    Route::get('detail', 'index/ArticleController/detail');
 
 })->allowCrossDomain();
 
@@ -48,7 +51,7 @@ Route::group('album', function () {
     Route::post('edit', 'index/AlbumController/edit')->middleware('auth');
     Route::post('delete', 'index/AlbumController/delete')->middleware('auth');
 
-    Route::get('list/[:userId]', 'index/AlbumController/getList')->pattern(['userId' => '\d+']);
+    Route::get('list', 'index/AlbumController/getList');
 
 })->allowCrossDomain();
 
@@ -59,7 +62,18 @@ Route::group('photo', function () {
     Route::post('transfer', 'index/PhotoController/transfer')->middleware('auth');
     Route::post('delete', 'index/PhotoController/delete')->middleware('auth');
 
-    Route::get('list/[:userId]', 'index/PhotoController/getList')->pattern(['userId' => '\d+']);
+    Route::get('list', 'index/PhotoController/getList');
+
+})->allowCrossDomain();
+
+
+// 留言模块
+Route::group('comment', function () {
+
+    Route::post('add', 'index/CommentController/add')->middleware('auth');
+    Route::post('delete', 'index/CommentController/delete')->middleware('auth');
+
+    Route::get('list', 'index/CommentController/getList');
 
 })->allowCrossDomain();
 

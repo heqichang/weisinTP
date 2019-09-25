@@ -22,6 +22,10 @@ class ArticleModel extends BaseModel
         return $this->belongsTo('UserModel', 'user_id', 'id');
     }
 
+    public function comments() {
+        return $this->hasMany('CommentModel', 'article_id', 'id');
+    }
+
     /**
      * 文章列表
      * @param $get
@@ -30,7 +34,7 @@ class ArticleModel extends BaseModel
     public static function getList($get) {
 
         $hidden = [
-            'user' => ['secret', 'delete_time', 'create_time', 'update_time']
+            'user' => ['secret', 'status', 'is_admin', 'delete_time', 'create_time', 'update_time']
         ];
 
         $db = self::with('user')->hidden($hidden);
@@ -57,10 +61,18 @@ class ArticleModel extends BaseModel
         }
 
         $fields = [
-            'id', 'user_id', 'title', 'content', 'category_id'
+            'id', 'user_id', 'title', 'category_id'
         ];
 
         return $db->field($fields)->order('create_time', 'desc')->paginate(10, false, ['page' => $page]);
+    }
+
+    public static function getDetail($id) {
+
+        return self::with('user')
+            ->hidden(['user' => ['secret', 'status', 'is_admin', 'delete_time', 'create_time', 'update_time']])
+            ->field(['id', 'user_id', 'title', 'category_id', 'content'])
+            ->get($id);
     }
 
 

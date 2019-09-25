@@ -19,7 +19,8 @@ class PhotoValidate extends BaseValidate
     protected $scene = [
         'add' => ['album_id', 'urls'],
         'delete' => ['id'],
-        'transfer' => ['id', 'album_id']
+        'transfer' => ['id', 'album_id'],
+        'list' => ['album_id', 'page'],
     ];
 
     /**
@@ -32,6 +33,7 @@ class PhotoValidate extends BaseValidate
         'id' => ['require', 'number'],
         'album_id' => ['require', 'number'],
         'urls' => ['require', 'array'],
+        'page' => ['number'],
     ];
 
     /**
@@ -47,6 +49,7 @@ class PhotoValidate extends BaseValidate
         'album_id.number' => '相册id格式不正确',
         'urls.require' => '图片参数不能为空',
         'urls.array' => '图片参数格式不正确',
+        'page.number' => '页码格式不正确',
     ];
 
     /**
@@ -60,6 +63,7 @@ class PhotoValidate extends BaseValidate
         'album_id.number' => 10003,
         'urls.require' => 10001,
         'urls.array' => 10003,
+        'page.number' => 10003,
     ];
 
 }

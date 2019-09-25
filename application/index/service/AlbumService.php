@@ -40,8 +40,8 @@ class AlbumService
 
 
     /**
-     * 编辑
      * @param $post
+     * @throws MyException
      * @throws \app\http\exception\FromValidException
      */
     public function edit($post) {
@@ -95,12 +95,15 @@ class AlbumService
 
     /**
      * 相册列表
-     * @param $param
+     * @param $get
      * @return \think\Paginator
      */
-    public function getList($param) {
+    public function getList($get) {
 
-        $result = AlbumModel::getList($param);
+        $validate = new AlbumValidate();
+        $validate->run($get, '', 'list');
+
+        $result = AlbumModel::getList($get);
         return $result;
     }
 

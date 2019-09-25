@@ -71,5 +71,19 @@ class ArticleController extends BaseController
         return $this->response_ok($result);
     }
 
+    /**
+     * 文章详情
+     * @return \think\response\Json
+     * @throws \app\http\exception\MyException
+     */
+    public function detail() {
+        $get = $this->request->get();
+
+        $service = new ArticleService();
+        $result = $service->getDetail($get);
+
+        return $this->response_ok($result);
+    }
+
 
 }

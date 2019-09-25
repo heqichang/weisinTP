@@ -11,13 +11,23 @@ class UserModel extends BaseModel
     protected $pk = 'id';
 
 
-    public function articles()
-    {
-        return $this->hasMany('ArticleModel');
+//    public function articles()
+//    {
+//        return $this->hasMany('ArticleModel');
+//    }
+
+    /**
+     * 拼接头像全路径地址
+     * @param $value
+     * @return string
+     */
+    public function getAvatarAttr($value) {
+        return env('URL.IMAGE_BASE_URL') . $value;
     }
 
     /**
-     * @param $name 用户名
+     * 根据用户名查找是否存在该用户
+     * @param $username 用户名
      * @return bool
      */
     public function isNameExist($username)

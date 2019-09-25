@@ -19,6 +19,7 @@ class AlbumValidate extends BaseValidate
         'add' => ['name'],
         'edit'  =>  ['id', 'name'],
         'delete' => ['id'],
+        'list' => ['user_id', 'page'],
     ];
 
     /**
@@ -29,7 +30,9 @@ class AlbumValidate extends BaseValidate
      */
     protected $rule = [
         'id' => ['require', 'number'],
+        'user_id' => ['number'],
         'name' => ['require'],
+        'page' => ['number']
     ];
 
     /**
@@ -41,7 +44,9 @@ class AlbumValidate extends BaseValidate
     protected $message = [
         'id.require' => '相册id不能为空',
         'id.number' => '相册id格式不正确',
+        'user_id.number' => '用户id格式不正确',
         'name.require' => '相册名称不能为空',
+        'page.number' => '页码格式不对',
     ];
 
     /**
@@ -51,7 +56,9 @@ class AlbumValidate extends BaseValidate
     protected $errorCode = [
         'id.require' => 10001,
         'id.number' => 10003,
+        'user_id.number' => 10003,
         'name.require' => 10001,
+        'page.number' => 10003,
     ];
 
 }

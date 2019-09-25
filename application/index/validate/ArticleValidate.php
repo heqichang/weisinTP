@@ -21,6 +21,7 @@ class ArticleValidate extends BaseValidate
         'edit'  =>  ['id', 'title', 'category_id'],
         'delete' => ['id'],
         'list' => ['category_id', 'page', 'start_time', 'end_time'],
+        'detail' => ['id'],
     ];
 
     /**
