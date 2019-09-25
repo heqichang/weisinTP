@@ -11,6 +11,11 @@ class UserModel extends BaseModel
     protected $pk = 'id';
 
 
+    public function articles()
+    {
+        return $this->hasMany('ArticleModel');
+    }
+
     /**
      * @param $name 用户名
      * @return bool

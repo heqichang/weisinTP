@@ -11,6 +11,11 @@ namespace app\index\controller;
 use app\index\service\UserService;
 use app\http\exception\MyException;
 
+/**
+ * 用户控制器
+ * Class UserController
+ * @package app\index\controller
+ */
 class UserController extends BaseController {
 
     public function register() {

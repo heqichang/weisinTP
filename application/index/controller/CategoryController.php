@@ -3,30 +3,24 @@
  * Created by PhpStorm.
  * User: heqichang
  * Date: 9/24/19
- * Time: 9:06 AM
+ * Time: 2:57 PM
  */
 
 namespace app\index\controller;
 
-use app\index\service\ArticleService;
 
-/**
- * 文章控制器
- * Class ArticleController
- * @package app\index\controller
- */
-class ArticleController extends BaseController
+use app\index\service\CategoryService;
+
+class CategoryController extends BaseController
 {
-
     /**
-     * 发布
+     * 添加
      * @return \think\response\Json
      */
-    public function post() {
-
+    public function add() {
         $post = $this->request->post();
-        $service = new ArticleService();
-        $service->post($post);
+        $service = new CategoryService();
+        $service->add($post);
 
         return $this->response_ok();
     }
@@ -38,7 +32,7 @@ class ArticleController extends BaseController
      */
     public function edit() {
         $post = $this->request->post();
-        $service = new ArticleService();
+        $service = new CategoryService();
         $service->edit($post);
 
         return $this->response_ok();
@@ -50,26 +44,22 @@ class ArticleController extends BaseController
      * @throws \app\http\exception\MyException
      */
     public function delete() {
-
         $post = $this->request->post();
-        $service = new ArticleService();
+        $service = new CategoryService();
         $service->delete($post);
 
         return $this->response_ok();
     }
 
     /**
-     * 文章列表
+     * 目录列表
      * @return \think\response\Json
      */
     public function getList() {
-
-        $get = $this->request->get();
-        $service = new ArticleService();
-        $result = $service->getList($get);
+        $service = new CategoryService();
+        $result = $service->getList();
 
         return $this->response_ok($result);
     }
-
 
 }

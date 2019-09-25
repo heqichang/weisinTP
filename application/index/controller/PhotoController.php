@@ -3,43 +3,41 @@
  * Created by PhpStorm.
  * User: heqichang
  * Date: 9/24/19
- * Time: 9:06 AM
+ * Time: 4:53 PM
  */
 
 namespace app\index\controller;
-
-use app\index\service\ArticleService;
+use app\index\service\PhotoService;
 
 /**
- * 文章控制器
- * Class ArticleController
+ * 图片管理控制器
+ * Class PhotoController
  * @package app\index\controller
  */
-class ArticleController extends BaseController
+class PhotoController extends BaseController
 {
 
     /**
-     * 发布
+     * 添加
      * @return \think\response\Json
      */
-    public function post() {
-
+    public function add() {
         $post = $this->request->post();
-        $service = new ArticleService();
-        $service->post($post);
+        $service = new PhotoService();
+        $service->add($post);
 
         return $this->response_ok();
     }
 
     /**
-     * 编辑
+     * 相册转移
      * @return \think\response\Json
      * @throws \app\http\exception\MyException
      */
-    public function edit() {
+    public function transfer() {
         $post = $this->request->post();
-        $service = new ArticleService();
-        $service->edit($post);
+        $service = new PhotoService();
+        $service->transfer($post);
 
         return $this->response_ok();
     }
@@ -50,26 +48,22 @@ class ArticleController extends BaseController
      * @throws \app\http\exception\MyException
      */
     public function delete() {
-
         $post = $this->request->post();
-        $service = new ArticleService();
+        $service = new AlbumService();
         $service->delete($post);
 
         return $this->response_ok();
     }
 
     /**
-     * 文章列表
+     * 目录列表
      * @return \think\response\Json
      */
     public function getList() {
-
-        $get = $this->request->get();
-        $service = new ArticleService();
-        $result = $service->getList($get);
+        $service = new AlbumService();
+        $result = $service->getList();
 
         return $this->response_ok($result);
     }
-
 
 }

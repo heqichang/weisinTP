@@ -18,8 +18,9 @@ class ArticleValidate extends BaseValidate
      */
     protected $scene = [
         'post' => ['title', 'category_id'],
-        'edit'  =>  ['title','category_id'],
+        'edit'  =>  ['id', 'title', 'category_id'],
         'delete' => ['id'],
+        'list' => ['category_id', 'page', 'start_time', 'end_time'],
     ];
 
     /**
@@ -30,9 +31,12 @@ class ArticleValidate extends BaseValidate
      */
     protected $rule = [
         'id' => ['require', 'number'],
-//        'user_id' => ['require', 'number'],
+
         'title' => ['require'],
         'category_id' => ['number'],
+        'page' => ['number'],
+        'start_time' => ['dateFormat:Y-m-d'],
+        'end_time' => ['dateFormat:Y-m-d'],
     ];
 
     /**
@@ -46,6 +50,9 @@ class ArticleValidate extends BaseValidate
         'id.number' => '文章id格式不正确',
         'title.require' => '文章标题不能为空',
         'category_id.number' => '文章目录格式不正确',
+        'page.number' => '分页格式不正确',
+        'start_time.dateFormat' => '日期格式不正确',
+        'end_time.dateFormat' => '日期格式不正确',
     ];
 
     /**
@@ -57,7 +64,9 @@ class ArticleValidate extends BaseValidate
         'id.number' => 10003,
         'title.require' => 10001,
         'category_id.number' => 10003,
-
+        'page.number' => 10003,
+        'start_time.dateFormat' => 10003,
+        'end_time.dateFormat' => 10003,
     ];
 
 
