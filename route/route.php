@@ -77,4 +77,9 @@ Route::group('comment', function () {
 
 })->allowCrossDomain();
 
+// 七牛
+Route::group('qiniu', function () {
+    Route::get('auth', 'index/QiniuController/auth')->middleware('auth');
+})->allowCrossDomain();
+
 

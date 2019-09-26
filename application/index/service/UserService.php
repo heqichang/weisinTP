@@ -129,7 +129,7 @@ class UserService extends MyService
         $validate = new UserValidate();
         $validate->run($get, '', 'detail');
 
-        $model = UserModel::getByID($get['id'], ['id', 'username', 'avatar', 'status', 'is_admin']);
+        $model = UserModel::getByID($get['id'], ['id', 'username', 'avatar', 'status']);
 
         if ($model->isEmpty()) {
             throw new MyException('不存在该用户', 100011);

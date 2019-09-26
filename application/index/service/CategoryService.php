@@ -54,8 +54,7 @@ class CategoryService
 
         // 非作者不可用此操作
         $apiUserId = app('api_user')->getUser('id');
-        $isAdmin = app('api_user')->getUser('is_admin');
-        if ($apiUserId != $category['user_id'] && !$isAdmin) {
+        if ($apiUserId != $category['user_id']) {
             throw new MyException('没有权限执行此操作', 10011);
         }
 
@@ -83,8 +82,7 @@ class CategoryService
 
         // 非作者不可用此操作
         $apiUserId = app('api_user')->getUser('id');
-        $isAdmin = app('api_user')->getUser('is_admin');
-        if ($apiUserId != $category['user_id'] && !$isAdmin) {
+        if ($apiUserId != $category['user_id']) {
             throw new MyException('没有权限执行此操作', 10011);
         }
 

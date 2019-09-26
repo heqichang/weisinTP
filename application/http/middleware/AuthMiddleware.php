@@ -35,7 +35,7 @@ class AuthMiddleware
         app('api')->authorization();
         $userId = app('api')->getDecodeToken('sub');
 
-        $user = UserModel::getByID($userId, ['id', 'username', 'avatar', 'status', 'is_admin', 'delete_time'], true);
+        $user = UserModel::getByID($userId, ['id', 'username', 'avatar', 'status', 'delete_time'], true);
 
         if ($user->isEmpty()) {
             throw new MyException('没有找到该用户', 100011);

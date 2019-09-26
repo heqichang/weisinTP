@@ -34,7 +34,7 @@ class ArticleModel extends BaseModel
     public static function getList($get) {
 
         $hidden = [
-            'user' => ['secret', 'status', 'is_admin', 'delete_time', 'create_time', 'update_time']
+            'user' => ['secret', 'status', 'delete_time', 'create_time', 'update_time']
         ];
 
         $db = self::with('user')->hidden($hidden);
@@ -70,8 +70,8 @@ class ArticleModel extends BaseModel
     public static function getDetail($id) {
 
         return self::with('user')
-            ->hidden(['user' => ['secret', 'status', 'is_admin', 'delete_time', 'create_time', 'update_time']])
-            ->field(['id', 'user_id', 'title', 'category_id', 'content'])
+            ->hidden(['user' => ['secret', 'status', 'delete_time', 'create_time', 'update_time']])
+            ->field(['id', 'user_id', 'title', 'category_id', 'content', 'create_time'])
             ->get($id);
     }
 
