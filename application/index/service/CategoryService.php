@@ -49,13 +49,13 @@ class CategoryService
         $category = CategoryModel::get($post['id']);
 
         if (null === $category) {
-            throw new MyException('不存在该目录', 100011);
+            throw new MyException('不存在该目录', 10021);
         }
 
         // 非作者不可用此操作
         $apiUserId = app('api_user')->getUser('id');
         if ($apiUserId != $category['user_id']) {
-            throw new MyException('没有权限执行此操作', 10011);
+            throw new MyException('没有权限执行此操作', 10023);
         }
 
         $category['name'] = $post['name'];
@@ -77,13 +77,13 @@ class CategoryService
         $category = CategoryModel::get($post['id'], 'articles');
 
         if (null === $category) {
-            throw new MyException('不存在该文章', 100011);
+            throw new MyException('不存在该文章', 10021);
         }
 
         // 非作者不可用此操作
         $apiUserId = app('api_user')->getUser('id');
         if ($apiUserId != $category['user_id']) {
-            throw new MyException('没有权限执行此操作', 10011);
+            throw new MyException('没有权限执行此操作', 10023);
         }
 
         $category->together('articles')->delete();

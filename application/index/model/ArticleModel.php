@@ -22,8 +22,12 @@ class ArticleModel extends BaseModel
         return $this->belongsTo('UserModel', 'user_id', 'id');
     }
 
-    public function comments() {
-        return $this->hasMany('CommentModel', 'article_id', 'id');
+    /**
+     * 关联目录
+     * @return \think\model\relation\BelongsTo
+     */
+    public function category() {
+        return $this->belongsTo('CategoryModel', 'category_id', 'id');
     }
 
     /**
@@ -34,10 +38,17 @@ class ArticleModel extends BaseModel
     public static function getList($get) {
 
         $hidden = [
-            'user' => ['secret', 'status', 'delete_time', 'create_time', 'update_time']
+            'user' => ['secret', 'status', 'delete_time', 'create_time', 'update_time'],
+            'category' => ['delete_time', 'create_time', 'update_time']
         ];
 
-        $db = self::with('user')->hidden($hidden);
+        // 坑：字符串内多个关联不要有空格
+        $db = self::with('user,category')->hidden($hidden);
+
+        // 用户过滤
+        if (isset($get['user_id'])) {
+            $db = $db->where('user_id', $get['user_id']);
+        }
 
         // 目录查找
         if (isset($get['category_id'])) {
@@ -69,8 +80,11 @@ class ArticleModel extends BaseModel
 
     public static function getDetail($id) {
 
-        return self::with('user')
-            ->hidden(['user' => ['secret', 'status', 'delete_time', 'create_time', 'update_time']])
+        return self::with('user,category')
+            ->hidden([
+                'user' => ['secret', 'status', 'delete_time', 'create_time', 'update_time'],
+                'category' => ['delete_time', 'create_time', 'update_time']
+            ])
             ->field(['id', 'user_id', 'title', 'category_id', 'content', 'create_time'])
             ->get($id);
     }

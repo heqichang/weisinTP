@@ -33,11 +33,11 @@ class PhotoService
 
         // 测试相册拥有者
         if ($userId != $album['user_id']) {
-            throw new MyException('无权操作', 100011);
+            throw new MyException('无权操作', 10023);
         }
 
         if (null === $album) {
-            throw new MyException('该相册id不对', 100011);
+            throw new MyException('该相册id不对', 10021);
         }
 
         PhotoModel::addPhotos($userId, $post['album_id'], $post['urls']);

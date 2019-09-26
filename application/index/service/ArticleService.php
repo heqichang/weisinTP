@@ -63,13 +63,13 @@ class ArticleService
         $article = ArticleModel::get($post['id']);
 
         if (null === $article) {
-            throw new MyException('不存在该文章', 100011);
+            throw new MyException('不存在该文章', 10021);
         }
 
         // 非作者或管理员不可用此操作
         $apiUserId = app('api_user')->getUser('id');
         if ($apiUserId != $article['user_id']) {
-            throw new MyException('没有权限执行此操作', 10011);
+            throw new MyException('没有权限执行此操作', 10023);
         }
 
         $article['title'] = $post['title'];
@@ -103,13 +103,13 @@ class ArticleService
         $article = ArticleModel::get($post['id'], 'comments');
 
         if (null === $article) {
-            throw new MyException('不存在该文章', 100011);
+            throw new MyException('不存在该文章', 10021);
         }
 
         // 非作者或管理员不可用此操作
         $apiUserId = app('api_user')->getUser('id');
         if ($apiUserId != $article['user_id']) {
-            throw new MyException('没有权限执行此操作', 10011);
+            throw new MyException('没有权限执行此操作', 10023);
         }
 
         $article->together('comments')->delete();
@@ -134,7 +134,7 @@ class ArticleService
 
     /**
      * 文章详情
-     * @param $id
+     * @param $get
      * @return null|static
      * @throws MyException
      */
@@ -146,7 +146,7 @@ class ArticleService
         $model = ArticleModel::getDetail($get['id']);
 
         if (null === $model) {
-            throw new MyException('没有找到该文章', 10011);
+            throw new MyException('没有找到该文章', 10021);
         }
 
         return $model;

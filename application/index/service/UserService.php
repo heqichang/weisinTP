@@ -132,7 +132,7 @@ class UserService extends MyService
         $model = UserModel::getByID($get['id'], ['id', 'username', 'avatar', 'status']);
 
         if ($model->isEmpty()) {
-            throw new MyException('不存在该用户', 100011);
+            throw new MyException('不存在该用户', 10021);
         }
 
         return $model;

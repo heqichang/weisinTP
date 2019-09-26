@@ -54,13 +54,13 @@ class CommentService
         $comment = CommentModel::get($post['id']);
 
         if (null === $comment) {
-            throw new MyException('不存在该留言', 100011);
+            throw new MyException('不存在该留言', 10021);
         }
 
         // 非作者不可用此操作
         $apiUserId = app('api_user')->getUser('id');
         if ($apiUserId != $comment['user_id']) {
-            throw new MyException('没有权限执行此操作', 10011);
+            throw new MyException('没有权限执行此操作', 10023);
         }
 
         $comment->delete();
