@@ -15,8 +15,23 @@ class CategoryModel extends BaseModel
     protected $table = 'category';
 
 
+    /**
+     * 关联文章
+     * @return \think\model\relation\HasMany
+     */
     public function articles() {
         return $this->hasMany('ArticleModel', 'category_id', 'id');
+    }
+
+    /**
+     * 查找用户下的目录列表
+     * @param $userId
+     * @return array|\PDOStatement|string|\think\Collection
+     */
+    public static function getByUserId($userId) {
+        return self::field(['id, name'])
+            ->where('user_id', $userId)
+            ->select();
     }
 
 }

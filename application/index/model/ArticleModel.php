@@ -31,6 +31,14 @@ class ArticleModel extends BaseModel
     }
 
     /**
+     * 关联评论
+     * @return \think\model\relation\HasMany
+     */
+    public function comments() {
+        return $this->hasMany('CommentModel', 'article_id', 'id');
+    }
+
+    /**
      * 文章列表
      * @param $get
      * @return \think\Paginator

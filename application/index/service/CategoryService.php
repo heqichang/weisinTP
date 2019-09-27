@@ -32,7 +32,16 @@ class CategoryService
             'name' => $post['name'],
         ];
 
-        CategoryModel::create($param);
+        $mode = CategoryModel::create($param);
+
+        if ($mode->isEmpty()) {
+            throw new MyException('数据没有保存成功', 10013);
+        }
+
+        return [
+            'id' => intval($mode['id']),
+            'name' => $mode['name'],
+        ];
     }
 
 
@@ -92,12 +101,12 @@ class CategoryService
 
     /**
      * 目录列表
-     * @param $get
      * @return \think\Paginator
      */
     public function getList() {
 
-        $result = CategoryModel::field('id, name')->select();
+        $apiUserId = app('api_user')->getUser('id');
+        $result = CategoryModel::getByUserId($apiUserId);
 
         return $result;
     }

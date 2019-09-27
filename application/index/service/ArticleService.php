@@ -20,7 +20,6 @@ use app\index\validate\ArticleValidate;
  */
 class ArticleService
 {
-
     /**
      * 发布文章
      * @param $post
@@ -42,7 +41,7 @@ class ArticleService
             $param['content'] = $post['content'];
         }
 
-        if (isset($post['category_id'])) {
+        if (!empty($post['category_id'])) {
             $param['category_id'] = $post['category_id'];
         }
 
@@ -80,7 +79,7 @@ class ArticleService
             $article['content'] = null;
         }
 
-        if (isset($post['category_id'])) {
+        if (!empty($post['category_id'])) {
             $article['category_id'] = $post['category_id'];
         } else {
             $article['category_id'] = null;
@@ -130,7 +129,6 @@ class ArticleService
 
         return $result;
     }
-
 
     /**
      * 文章详情

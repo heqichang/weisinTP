@@ -20,9 +20,9 @@ class CategoryController extends BaseController
     public function add() {
         $post = $this->request->post();
         $service = new CategoryService();
-        $service->add($post);
+        $result = $service->add($post);
 
-        return $this->response_ok();
+        return $this->response_ok($result);
     }
 
     /**
