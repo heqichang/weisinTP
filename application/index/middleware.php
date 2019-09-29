@@ -8,5 +8,5 @@
 
 return [
 //    app\http\middleware\
-    app\http\middleware\HeaderCheckMiddleware::class,
+//    app\http\middleware\HeaderCheckMiddleware::class,
 ];

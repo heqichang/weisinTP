@@ -18,5 +18,5 @@ return [
 
     'auth' => app\http\middleware\AuthMiddleware::class,
     'admin' => app\http\middleware\AdminMiddleware::class,
-
+    'header_check' => app\http\middleware\HeaderCheckMiddleware::class,
 ];

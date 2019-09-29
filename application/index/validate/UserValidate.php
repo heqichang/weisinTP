@@ -15,7 +15,7 @@ class UserValidate extends BaseValidate {
      */
     protected $scene = [
         'register' => ['username', 'secret'],
-        'login'  =>  ['username','secret'],
+        'login'  =>  ['username','secret', 'captcha', 'timestamp'],
         'edit' => ['username'],
         'detail' => ['id'],
     ];
@@ -30,8 +30,8 @@ class UserValidate extends BaseValidate {
         'id' => ['require', 'number'],
         'username' => ['require', 'length' => '4,25', 'regex' => '^[_\w\d]+$'],
         'secret' => ['require', 'regex' => '^(?![a-zA-Z]+$)(?![0-9]+$).{6,}$'],
-
-
+        'captcha' => ['require'],
+        'timestamp' => ['number']
     ];
 
     /**
@@ -48,6 +48,8 @@ class UserValidate extends BaseValidate {
         'username.regex' => '用户名只能为字母、数字或_',
         'secret.require' => '密码不能为空',
         'secret.regex' => '密码长度至少6位，并且不能是纯字符或纯数字',
+        'captcha.require' => '必须填入验证码',
+        'timestamp.number' => '时间戳格式不对',
     ];
 
     /**
@@ -62,6 +64,8 @@ class UserValidate extends BaseValidate {
         'username.regex' => 10003,
         'secret.require' => 10001,
         'secret.regex' => 10003,
+        'captcha.require' => 10001,
+        'timestamp.number' => 10003,
     ];
 
 

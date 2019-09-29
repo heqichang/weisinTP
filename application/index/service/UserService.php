@@ -13,6 +13,9 @@ use app\http\exception\MyException;
 use app\index\model\UserModel;
 use app\common\service\MyService;
 use app\index\validate\UserValidate;
+use captcha\Captcha;
+use think\Config;
+use think\facade\Session;
 
 /**
  * 用户业务处理
@@ -58,6 +61,11 @@ class UserService extends MyService
     {
         $validate = new UserValidate();
         $validate->run($post, '', 'login');
+
+        $captcha = new Captcha();
+        if (!$captcha->check($post['captcha'], $post['timestamp'])) {
+            throw new MyException('验证码不对或者已过期', 10016);
+        }
 
         $user = UserModel::getByUsername(
             $post['username'],

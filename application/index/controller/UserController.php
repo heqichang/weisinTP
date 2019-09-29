@@ -10,6 +10,7 @@ namespace app\index\controller;
 
 use app\index\service\UserService;
 use app\http\exception\MyException;
+use redis\MyRedis;
 
 /**
  * 用户控制器
@@ -43,6 +44,7 @@ class UserController extends BaseController {
      * @throws MyException
      */
     public function login() {
+
 
         $post = $this->request->post();
 
