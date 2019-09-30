@@ -133,5 +133,7 @@ docker-compose up -d
 docker-compose down
 ~~~
 
+* localhost 默认 8800 是 api 服务器，8801 是 phpmyadmin，8802 是 phpredisadmin，数据库默认用户名 root ，密码 weisin
+
 ### 注意事项
 使用容器部署，第一次部署的时候，本地没有找到相关镜像，会去下载镜像会很慢，可参考这篇文章加上加速器下载，[https://www.jianshu.com/p/405fe33b9032](!https://www.jianshu.com/p/405fe33b9032)。第一次成功部署之后，下次 up 运行不会重新下载，就很快了。
