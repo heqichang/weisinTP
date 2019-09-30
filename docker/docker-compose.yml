@@ -1,0 +1,55 @@
+version: "3.7"
+services:
+  php-fpm:
+    image: heqichang/weisin-basefpm
+    container_name: php-fpm
+    volumes:
+      - "$PWD/../:/var/www"
+
+  nginx:
+    image: nginx
+    container_name: nginx
+    depends_on:
+      - "php-fpm"
+    volumes:
+      - "$PWD/../:/var/www"
+      - "$PWD/../site.conf:/etc/nginx/conf.d/default.conf"
+    ports:
+      - "8800:80"
+
+  mysql:
+    image: mysql:5.7
+    environment:
+      - MYSQL_ROOT_PASSWORD=weisin
+    volumes:
+      - "$PWD/../db:/var/lib/mysql"
+    container_name: mysql
+
+  myadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      - PMA_HOST=mysql
+    ports:
+      - "8801:80"
+    container_name: myadmin
+
+  redis:
+    image: redis:4
+    container_name: redis
+
+  redisadmin:
+    image: erikdubbelboer/phpredisadmin
+    environment:
+      - REDIS_1_HOST=redis
+    ports:
+      - "8802:80"
+    container_name: redisadmin
+
+
+
+
+
+
+
+
+
