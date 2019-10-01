@@ -115,13 +115,8 @@ BUCKET='weisin365'
 
 # 容器部署
 
-* 需要在项目根目录下先执行以下命令（pecl 安装 redis 扩展会经常报错，可以多试几次）
 
-~~~
-docker build -t heqichang/weisin-basefpm .
-~~~
-
-* 然后进入 docker 目录执行以下命令就可以运行了
+* 进入 docker 目录执行以下命令就可以运行了
 
 ~~~
 docker-compose up -d
